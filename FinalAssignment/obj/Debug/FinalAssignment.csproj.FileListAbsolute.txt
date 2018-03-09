@@ -1,0 +1,7 @@
+C:\Users\lucho\source\repos\OfficeDev1\FinalAssignment\FinalAssignment\bin\Debug\ApplicationInsights.config
+C:\Users\lucho\source\repos\OfficeDev1\FinalAssignment\FinalAssignment\bin\Debug\FinalAssignment.dll.config
+C:\Users\lucho\source\repos\OfficeDev1\FinalAssignment\FinalAssignment\bin\Debug\FinalAssignment.pdb
+C:\Users\lucho\source\repos\OfficeDev1\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.csproj.CoreCompileInputs.cache
+C:\Users\lucho\source\repos\OfficeDev1\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.dll
+C:\Users\lucho\source\repos\OfficeDev1\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.pdb
+C:\Users\lucho\source\repos\OfficeDev1\FinalAssignment\FinalAssignment\obj\Debug\FinalAssignment.csprojResolveAssemblyReference.cache

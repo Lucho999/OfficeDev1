@@ -1,0 +1,111 @@
+﻿@model Common.Models.Customer
+@using Microsoft.SharePoint.Client.Taxonomy
+
+<br />
+<table>
+    <tr>
+        <td>
+            <img src="@Url.Content(Model.Photo)" alt="Company Logo" class="img-logo" />
+        </td>
+        <td>
+            <h1>@Model.Title</h1>
+        </td>
+
+    </tr>
+</table>
+<div class="customer-container">
+    <div class="order-card-left">
+        <div><h3>Customer Details</h3></div>
+        <form method="post" action="/CustomerCard/SaveChanges?SPHostUrl=@ViewBag.SPHostUrl&ListItemId=@ViewBag.CustomerId">
+            <table class="table-customer" style="width:80%;">
+                <tr>
+                    <td>Adress </td>
+                    <td>
+                        <input type="text" name="Adress" value="@Model.Adress" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contact Name </td>
+                    <td>
+                        <input type="text" name="Fullname" value="@Model.FullName" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Office Number </td>
+                    <td>
+                        <input type="tel" name="WorkPhone" value="@Model.WorkPhone" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cellphone </td>
+                    <td>
+                        <input type="tel" name="CellPhone" value="@Model.CellPhone" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>E-mail </td>
+                    <td>
+                        <input type="email" name="Email" value="@Model.Email" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last Contacted </td>
+                    <td>
+                        <input type="datetime" name="LastContacted" value="@Model.LastContacted" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Last Order Made </td>
+                    <td>
+                        <input type="datetime" name="LastOrderMade" value="@Model.LastOrderMade" readonly style="background:lightgray" />
+                    </td>
+                </tr>
+
+            </table>
+            <input type="submit" name="submit" value="Save Changes" class="btn btn-danger" />
+        </form>
+    </div>
+
+
+    <div class="right-side">
+        <div><h3>Latest Orders</h3></div>
+        <table class="table">
+            <tr>
+                <th>Date Created</th>
+                <th>Products</th>
+                <th>Amount</th>
+            </tr>
+
+            @foreach (var item in ViewBag.OrderList)
+            {
+                var tax_products = item["SW_TaxProduct"] as TaxonomyFieldValueCollection;
+
+                <tr>
+                    <td> @item["Created"]</td>
+                    <td>
+                        <ul>
+                            @foreach (var product in tax_products)
+                            {
+                                <li>
+                                    @product.Label.ToString()
+                                </li>
+                            }
+                        </ul>
+                    </td>
+                    <td>@item["SW_AmountMoney"]</td>
+                </tr>
+
+
+            }
+
+        </table>
+        <div class="new-order">@Html.ActionLink("Create new order", "NewOrder" , new { ListItemId = ViewBag.CustomerId })</div>
+    
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

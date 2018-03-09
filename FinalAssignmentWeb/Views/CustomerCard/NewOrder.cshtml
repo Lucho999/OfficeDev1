@@ -1,0 +1,70 @@
+﻿@using Microsoft.SharePoint.Client.Taxonomy
+@{
+    ViewBag.Title = "NewOrder";
+}
+
+
+<form method="post">
+    <input type="hidden" name="Customer" value="@ViewBag.listitem" />
+    
+    <table>
+        <tr>
+            <td><h1>@ViewBag.CompanyName</h1></td>
+            <td></td>
+        </tr>
+      
+        <tr>
+            <td>What products?</td>
+            @foreach (var item in ViewBag.termset)
+            {
+            <tr>
+                <td>
+                    <ul>
+                        <li>
+                            <input type="checkbox" name="Products" class="myCheckbox" value="@item.Name.ToString()" onchange="checkboxes()"/>@item.Name.ToString()
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        }
+            <tr>
+                <td>Amount:</td>
+                <td> <input type="number" name="Amount" value="" required/></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" name="submit" value="New Order" id="submitButton" />
+                    <div id="MyHiddenDiv">Please Choose a product to submit order!</div>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+<script>
+    var counter = 0;
+    
+    checkboxes();
+    function checkboxes() {
+        var inputElems = document.getElementsByClassName("myCheckbox");
+        count = 0;
+
+        for (var i = 0; i < inputElems.length; i++) {
+            if (inputElems[i].type === "checkbox" && inputElems[i].checked === true) {
+                count++;
+               
+            }
+        }
+        counter = count;
+        if (counter === 0) {
+            document.getElementById('submitButton').disabled = true;
+            document.getElementById("MyHiddenDiv").style.display = "block";
+        }
+        else {
+            document.getElementById('submitButton').disabled = false;
+            document.getElementById("MyHiddenDiv").style.display = "none";
+                
+        }
+    } 
+    
+
+</script>

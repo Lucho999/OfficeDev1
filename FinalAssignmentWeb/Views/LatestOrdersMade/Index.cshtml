@@ -1,0 +1,76 @@
+﻿@using Common.Models
+@model List<Order>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript">
+        // Set the style of the client web part page to be consistent with the host web.
+        (function () {
+            'use strict';
+
+            var hostUrl = '';
+            var link = document.createElement('link');
+            link.setAttribute('rel', 'stylesheet');
+            if (document.URL.indexOf('?') != -1) {
+                var params = document.URL.split('?')[1].split('&');
+                for (var i = 0; i < params.length; i++) {
+                    var p = decodeURIComponent(params[i]);
+                    if (/^SPHostUrl=/i.test(p)) {
+                        hostUrl = p.split('=')[1];
+                        link.setAttribute('href', hostUrl + '/_layouts/15/defaultcss.ashx');
+                        break;
+                    }
+                }
+            }
+            if (hostUrl == '') {
+                link.setAttribute('href', '/_layouts/15/1033/styles/themable/corev15.css');
+            }
+            document.head.appendChild(link);
+        })();
+    </script>
+    @Styles.Render("~/Content/css")
+
+</head>
+<body style="margin-top:0px; padding: 0px;">
+    <h1 style="text-align:center">5 Latest Orders</h1>
+    <br />
+    <table class="table">
+        <tr>
+            <th>Customer</th>
+            <th>Date Created</th>
+            <th>Products</th>
+            <th>Amount</th>
+        </tr>
+        @foreach (Order order in Model)
+        {
+            <tr>
+                <td>@order.CustomerName</td>
+                <td>@order.DateCreated</td>
+                <td>
+                    <ul style="list-style-type: none;">
+                        @foreach (string product in order.Products)
+                        {
+
+                            <li>
+                                @product.ToString()
+                            </li>
+
+                        }
+                    </ul>
+                </td>
+                <td>@order.Amount</td>
+            </tr>
+        }
+    </table>
+
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>

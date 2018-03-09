@@ -1,0 +1,23 @@
+﻿.img-logo{
+    max-height: 80px;
+    max-width: 200px;
+    width:100%;
+
+}
+.customer-container {
+    display: flex;
+    flex-direction: row;
+    min-width: 900px;
+}
+.order-card-left {
+    width: 450px;
+    min-width: 300px;
+}
+
+.order-card-right {
+    width: 100%;
+    max-width: 600px;
+    min-width: 500px;
+}
+
+

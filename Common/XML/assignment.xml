@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pnp:ProvisioningTemplate ID="CountryStuff" Version="1.0"
+      xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+  <!--
+  Taxonomi - within the group Luis, one termset and 3 Terms
+  Works
+  -->
+  <pnp:TermGroups>
+    <pnp:TermGroup Name="Luis" ID="{ec481286-9274-46a1-b1cb-d4500e991db9}">
+      <pnp:TermSets>
+        <pnp:TermSet Name="Products" ID="{FB2D9C96-5914-49D3-9E9B-276C39927E7C}" Language="1033">
+          <pnp:Terms>
+            <pnp:Term Name="Virus Protection" ID="{27C06130-4E45-4FFA-BF5A-BCBF63F6F6C1}" />
+            <pnp:Term Name="Spam Protection" ID="{96563063-3C38-4402-B224-C2869E924AAC}" />
+            <pnp:Term Name="Internet Filtering" ID="{7436AE03-32EC-4715-B2B7-DFF4417D5391}" />
+          </pnp:Terms>
+        </pnp:TermSet>
+      </pnp:TermSets>
+    </pnp:TermGroup>
+  </pnp:TermGroups>
+
+
+  <pnp:SiteFields>
+
+    <Field  Name="SW_LastContacted" Type="DateTime" DisplayName="Last Contacted" ID="{4659719B-3499-4546-BB95-984791ABE883}"  Required="FALSE" EnforceUniqueValues="FALSE" Format="DateTime" Group="AssignmentColumns" FriendlyDisplayFormat="Disabled" >
+      <Default>[today]</Default>
+    </Field>
+
+   <Field Name="SW_LastOrderMade" Type="DateTime" DisplayName="Last Order Made" ID="{4203ECEF-F3D5-41CF-AAF5-BE69D0CF03E2}"  ReadOnly="True" Required="FALSE" EnforceUniqueValues="FALSE" Format="DateTime" Group="AssignmentColumns" FriendlyDisplayFormat="Disabled">
+    </Field>
+
+    <Field Name="SW_Customer" Type="Lookup" ID="{3A020756-0073-4504-8585-02970AEC298D}"  Group="AssignmentColumns" Required="FALSE"  DisplayName="Customer" List="Lists/Customers" ShowField="Title" />
+
+    <Field ID="{CCFE4A97-EECC-464C-B2A8-6659036A9DA0}" Type="Note" DisplayName="Prodcuts_0"  Name="ProductsHid"  ShowInViewForms="FALSE" Required="FALSE" Hidden="TRUE" CanToggleHidden="TRUE" />
+    <Field ID="{854C4414-A6AB-46B2-A18B-D8BD4C46E960}"
+           Type="TaxonomyFieldTypeMulti"
+           DisplayName="Product"
+           Name="SW_TaxProduct"
+           ShowField="Term1033"
+           Required="FALSE"
+           EnforceUniqueValues="FALSE"
+           Group="AssignmentColumns"
+           Mult="TRUE">
+      <Customization>
+        <ArrayOfProperty>
+          <Property>
+            <Name>SspId</Name>
+            <Value xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}</Value>
+          </Property>
+          <Property>
+            <Name>TermSetId</Name>
+            <Value xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{termsetid:Luis:Products}</Value>
+          </Property>
+          <Property>
+            <Name>TextField</Name>
+            <Value xmlns:q6="http://www.w3.org/2001/XMLSchema" p4:type="q6:string" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{CCFE4A97-EECC-464C-B2A8-6659036A9DA0}</Value>
+          </Property>
+          <Property>
+            <Name>IsPathRendered</Name>
+            <Value xmlns:q7="http://www.w3.org/2001/XMLSchema" p4:type="q7:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+          </Property>
+          <Property>
+            <Name>IsKeyword</Name>
+            <Value xmlns:q8="http://www.w3.org/2001/XMLSchema" p4:type="q8:boolean" xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">false</Value>
+          </Property>
+        </ArrayOfProperty>
+      </Customization>
+    </Field>
+    <Field ID="{D7098638-B1BB-4813-BEBB-BCE058F40584}" Type="Number" Name="SW_AmountMoney" DisplayName="Amount" Min="1" Max="999999999" Group="AssignmentColumns"  />
+
+</pnp:SiteFields>
+
+  <pnp:ContentTypes>
+    <pnp:ContentType ID="0x01009AAE57725FCB46E3BC3689D374A45582"
+                     Name="Customer ContentType"
+                     Group="Assignment Content Types"
+                     Description="">
+      <pnp:FieldRefs>
+
+        <!--    FieldLookup(ctx, "_Photo");
+                FieldLookup(ctx, "WorkAddress");
+                FieldLookup(ctx, "FullName"); // Main Contact
+                FieldLookup(ctx, "WorkPhone");
+                FieldLookup(ctx, "CellPhone");
+                FieldLookup(ctx, "EMail");
+                Last Contacted 
+                Last order made
+               -->
+
+        <pnp:FieldRef ID="{1020c8a0-837a-4f1b-baa1-e35aff6da169}" Required="true" />
+        <pnp:FieldRef ID="{fc2e188e-ba91-48c9-9dd3-16431afddd50}" Required="true" />
+        <pnp:FieldRef ID="{475c2610-c157-4b91-9e2d-6855031b3538}" Required="true" Name="Main Contact" />
+        <pnp:FieldRef ID="{fd630629-c165-4513-b43c-fdb16b86a14d}" Required="true" />
+        <pnp:FieldRef ID="{2a464df1-44c1-4851-949d-fcd270f0ccf2}" Required="true" />
+        <pnp:FieldRef ID="{fce16b4c-fe53-4793-aaab-b4892e736d15}" Required="true" />
+
+        <pnp:FieldRef ID="{4659719B-3499-4546-BB95-984791ABE883}" />
+        <pnp:FieldRef ID="{4203ECEF-F3D5-41CF-AAF5-BE69D0CF03E2}" />
+
+      </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x01004EF103BB1EE648709AE57CB6A3CDA1D7"
+                     Name="Order List Content Type"
+                     Group="Assignment Content Types"
+                     Description="">
+      <pnp:FieldRefs>
+        <pnp:FieldRef ID="{3A020756-0073-4504-8585-02970AEC298D}" Required="true"/>
+        <pnp:FieldRef ID="{854C4414-A6AB-46B2-A18B-D8BD4C46E960}" Required="true"/>
+        <pnp:FieldRef ID="{D7098638-B1BB-4813-BEBB-BCE058F40584}" Required="true"/>
+      </pnp:FieldRefs>
+    </pnp:ContentType>
+  </pnp:ContentTypes>
+
+  <pnp:Lists>
+    <pnp:ListInstance Title="Customer List"
+            Description="List of Customers"
+            OnQuickLaunch="true"
+            TemplateType="100"
+            Url="Lists/Customers"
+            EnableVersioning="false"
+            EnableFolderCreation="false"
+            RemoveExistingContentTypes="true">
+      <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x01009AAE57725FCB46E3BC3689D374A45582" Default="true"/>
+      </pnp:ContentTypeBindings>
+    </pnp:ListInstance>
+    <pnp:ListInstance Title="Customer Orders"
+                Description="List of Orders"
+                OnQuickLaunch="true"
+                TemplateType="100"
+                Url="Lists/Orders"
+                EnableVersioning="false"
+                EnableFolderCreation="false"
+                RemoveExistingContentTypes="true">
+      <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x01004EF103BB1EE648709AE57CB6A3CDA1D7" Default="true"/>
+      </pnp:ContentTypeBindings>
+    </pnp:ListInstance>
+  </pnp:Lists>
+</pnp:ProvisioningTemplate>
