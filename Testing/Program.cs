@@ -24,8 +24,8 @@ namespace Testing
             using (ClientContext ctx = authManager.GetAppOnlyAuthenticatedContext(url, clientId, clientSecret))
             {
 
-                //SetupHelpers.RunXmlFiles(ctx);
-                SetupHelpers.FixDefaultView(ctx);
+                SetupHelpers.RunXmlFiles(ctx);
+                //SetupHelpers.FixDefaultView(ctx);
 
                 Console.WriteLine("Its done..");
                 Console.ReadKey();

@@ -100,7 +100,11 @@ namespace Common.Helpers
             customer.CellPhone = item["CellPhone"].ToString();
             customer.Email = item["EMail"].ToString();
             customer.LastContacted = DateTime.Parse(item["SW_LastContacted"].ToString());
-            customer.LastOrderMade = DateTime.Parse(item["SW_LastOrderMade"].ToString());
+            if (item["SW_LastOrderMade"]!= null)
+            {
+                customer.LastOrderMade = DateTime.Parse(item["SW_LastOrderMade"].ToString());
+
+            }
 
             string strurl = ((FieldUrlValue)(item["_Photo"])).Url;
             customer.Photo = strurl.ToString();
